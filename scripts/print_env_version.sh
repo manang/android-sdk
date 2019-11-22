@@ -41,9 +41,8 @@ getVersionFromSdkManager () {
 }
 
 getVersionFromQt () {
-	local abi=$1
-	local result=$2
-	local version=$(cat qt/Qt_$abi/components.xml | grep ApplicationName | awk '{print $2}' | awk -F "<" '{print $1}')
+	local result=$1
+	local version=$(cat qt/Qt/components.xml | grep ApplicationName | awk '{print $2}' | awk -F "<" '{print $1}')
 	if [ "${version}" = "" ]; then
     	eval $result="'not installed'"
     else
@@ -72,16 +71,10 @@ fi
 
 rm ${TEMP_FILE}
 
-if [ -f "qt/Qt_arm64/components.xml" ]; then
-	getVersionFromQt arm64 QT_VERSION_ARM64
+if [ -f "qt/Qt/components.xml" ]; then
+	getVersionFromQt QT_VERSION
 else
-	QT_VERSION_ARM64="not installed"
-fi
-
-if [ -f "qt/Qt_x86/components.xml" ]; then
-	getVersionFromQt x86 QT_VERSION_X86
-else
-	QT_VERSION_X86="not installed"
+	QT_VERSION="not installed"
 fi
 
 if [ -f "${VERSIONS_FILE}" ]; then
@@ -158,8 +151,7 @@ echo "cmake 3.6 = ${CMAKE_3_6}"
 echo "cmake 3.10 = ${CMAKE_3_10}"
 echo "#############################################################################"
 echo "QT ENVIRONMENT"
-echo "arm64 version = ${QT_VERSION_ARM64}"
-echo "x86 version = ${QT_VERSION_X86}"
+echo "Installed version = ${QT_VERSION}"
 echo "#############################################################################"
 echo "LIBRARIES INSTALLED"
 echo "openssl arm64 version = ${OPENSSL_VERSION_ARM64}" 
