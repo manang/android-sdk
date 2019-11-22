@@ -32,8 +32,8 @@ if [ ! -d ${QT_HOME}/${QT_VERSION}/${QT_ANDROID}/include/QtAV ]; then
 	export ANDROID_SDK_ROOT=${SDK}
 	export ANDROID_NDK_ROOT=${NDK}
 	export PATH=$PATH:${ANDROID_HOME}/tools:${JAVA_HOME}/bin
-    echo "INCLUDEPATH = ${INSTALLATION_DIR}/include/" > .qmake.conf
-	echo "LIBS = -L${INSTALLATION_DIR}/lib/" >> .qmake.conf
+    echo "INCLUDEPATH = ${INSTALLATION_DIR}/include/" > ${BASE_DIR}/src/QtAV/.qmake.conf
+	echo "LIBS = -L${INSTALLATION_DIR}/lib/" >> ${BASE_DIR}/src/QtAV/.qmake.conf
 	mkdir -p ${DISTILLERY_BUILD_DIR}/qtav
 	cd ${DISTILLERY_BUILD_DIR}/qtav
 	${QT_HOME}/${QT_VERSION}/${QT_ANDROID}/bin/qmake ${BASE_DIR}/src/QtAV/QtAV.pro -spec android-clang 

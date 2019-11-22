@@ -39,8 +39,8 @@ if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
 	    fi
 	    tar xf ffmpeg-4.2-android-clang.tar.xz
 	    mv ffmpeg-4.2-android-clang ffmpeg
+        rm -rf ffmpeg-4.2-android-clang.tar.xz
     fi
-	rm -rf ffmpeg-4.2-android-clang.tar.xz
     cp -r ffmpeg/include/* ${INSTALLATION_DIR}/include/
 	cp ffmpeg/lib/arm64-v8a/lib* ${INSTALLATION_DIR}/lib/
 	touch ${VERSIONS_FILE}
