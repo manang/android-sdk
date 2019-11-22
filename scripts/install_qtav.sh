@@ -17,7 +17,6 @@
 
 set -ex
 ABI=$1
-
 INSTALLATION_DIR=$2
 OS=`echo $OS | tr '[:upper:]' '[:lower:]'`
 export BASE_DIR=`pwd`
@@ -37,11 +36,11 @@ if [ ! -d ${QT_HOME}/${QT_VERSION}/${QT_ANDROID}/include/QtAV ]; then
 	echo "LIBS = -L${INSTALLATION_DIR}/lib/" >> .qmake.conf
 	mkdir -p ${DISTILLERY_BUILD_DIR}/qtav
 	cd ${DISTILLERY_BUILD_DIR}/qtav
-	${QT_HOME}/${QT_VERSION}/${QT_ANDROID}/bin/qmake $BASE_PATH/qt/QtAV/QtAV.pro -spec android-clang 
+	${QT_HOME}/${QT_VERSION}/${QT_ANDROID}/bin/qmake ${BASE_DIR}/src/QtAV/QtAV.pro -spec android-clang 
 	make
 	make install INSTALL_ROOT=${QT_ANDROID}
 	sh sdk_install.sh
-	QTAV_VERSION=$(git --git-dir=$BASE_PATH/src/QtAV/.git --work-tree=$BASE_PATH/src/QtAV/ log -1 --format="%H")
+	QTAV_VERSION=$(git --git-dir=${BASE_DIR}/src/QtAV/.git --work-tree=${BASE_DIR}/src/QtAV/ log -1 --format="%H")
 	touch ${VERSIONS_FILE}
 	${SED} -i "/${ABI}_QtAV/d" ${VERSIONS_FILE}
 	echo ${ABI}_QtAV=${QTAV_VERSION} >> ${VERSIONS_FILE}
