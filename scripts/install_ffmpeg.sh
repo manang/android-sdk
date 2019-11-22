@@ -24,7 +24,7 @@ mkdir -p ${INSTALLATION_DIR}
 mkdir -p ${INSTALLATION_DIR}/include
 
 
-if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
+if [ ! -d ${INSTALLATION_DIR}/include/libavcodec ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libavfilter ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libavresample ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libswresample ] \
@@ -42,8 +42,12 @@ if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
         rm -rf ffmpeg-4.2-android-clang.tar.xz
     fi
     cp -r ffmpeg/include/* ${INSTALLATION_DIR}/include/
-	cp ffmpeg/lib/arm64-v8a/lib* ${INSTALLATION_DIR}/lib/
-	touch ${VERSIONS_FILE}
+    if [ "${ABI}" = "arm64" ]; then
+	    cp ffmpeg/lib/arm64-v8a/lib* ${INSTALLATION_DIR}/lib/
+	elif [ "${ABI}" = "x86" ]; then
+        cp ffmpeg/lib/x86/lib* ${INSTALLATION_DIR}/lib/
+    fi
+    touch ${VERSIONS_FILE}
 	${SED} -i "/${ABI}_ffmpeg/d" ${VERSIONS_FILE}
 	echo ${ABI}_ffmpeg=4.2 >> ${VERSIONS_FILE}
     
