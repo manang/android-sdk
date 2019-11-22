@@ -112,7 +112,7 @@ install-all: install-directories ${modules}
 install-env: init_sdk init_qt
 
 download-dep:
-	./scripts/downlaod_dep.sh;
+	./scripts/download_dep.sh;
 
 compile-openssl:
 	./scripts/compile_openssl.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
@@ -123,10 +123,10 @@ install-asio:
 compile-dep: init compile-openssl install-asio libconfig libevent
 
 download-hicn:
-	./scripts/downlaod_hicn.sh;
+	./scripts/download_hicn.sh;
 
 download-qtdep:
-	./scripts/downlaod_qtdep.sh;
+	./scripts/download_qtdep.sh;
 
 compile-qtdep: init libxml2 curl viper/libdash install-ffmpeg
 
