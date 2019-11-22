@@ -39,12 +39,13 @@ if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
 	    fi
 	    tar xf ffmpeg-4.2-android-clang.tar.xz
 	    mv ffmpeg-4.2-android-clang ffmpeg
-	    rm -rf ffmpeg-4.2-android-clang.tar.xz
-        cp -r ffmpeg/include/* ${INSTALLATION_DIR}/include/
-		cp ffmpeg/lib/arm64-v8a/lib* ${INSTALLATION_DIR}/lib/
-		touch ${VERSIONS_FILE}
-		${SED} -i "/${ABI}_ffmpeg/d" ${VERSIONS_FILE}
-		echo ${ABI}_ffmpeg=4.2 >> ${VERSIONS_FILE}
     fi
+	rm -rf ffmpeg-4.2-android-clang.tar.xz
+    cp -r ffmpeg/include/* ${INSTALLATION_DIR}/include/
+	cp ffmpeg/lib/arm64-v8a/lib* ${INSTALLATION_DIR}/lib/
+	touch ${VERSIONS_FILE}
+	${SED} -i "/${ABI}_ffmpeg/d" ${VERSIONS_FILE}
+	echo ${ABI}_ffmpeg=4.2 >> ${VERSIONS_FILE}
+    
     cd ..
 fi
