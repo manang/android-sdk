@@ -133,6 +133,9 @@ compile-qtdep: init libxml2 curl viper/libdash install-ffmpeg
 install-ffmpeg:
 	./scripts/install_ffmpeg.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
 
+install-qtav:
+	./scripts/install_qtav.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
+
 compile-hicn: init cframework/libparc hicn
 
 #init_depend:

@@ -53,6 +53,8 @@ if [ ! -d ffmpeg ]; then
 		wget https://iweb.dl.sourceforge.net/project/avbuild/android/ffmpeg-4.2-android-clang.tar.xz
 	fi
 	tar xf ffmpeg-4.2-android-clang.tar.xz
+	pwd
+	ls
 	mv ffmpeg-4.2-android-clang ffmpeg
 	rm -rf ffmpeg-4.2-android-clang.tar.xz
 fi
@@ -61,5 +63,6 @@ if [ ! -d QtAV ]; then
 	git clone https://github.com/wang-bin/QtAV.git
 	cd QtAV
 	git checkout tags/v1.13.0
+	git submodule update --init
 	cd ..
 fi
