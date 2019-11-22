@@ -128,7 +128,7 @@ download-hicn:
 download-qtdep:
 	./scripts/download_qtdep.sh;
 
-compile-qtdep: init libxml2 curl viper/libdash install-ffmpeg
+compile-qtdep: init libxml2 curl viper/libdash install-ffmpeg install-qtav
 
 install-ffmpeg:
 	./scripts/install_ffmpeg.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
