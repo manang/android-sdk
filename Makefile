@@ -237,10 +237,9 @@ help:
 	@echo "make help			- This help message"
 	@echo "make update			- update hicn to the right commit"
 	@echo "make all				- Download sdk, ndk and dependencies, configure, compile and install all software in DISTILLERY_INSTALL_DIR"
-	@echo "make install-env			- Download sdk, ndk and qt
-	@echo "make init_sdk			- Download sdk, ndk
-	@echo "make init_qt			- Install qt
-
+	@echo "make install-env			- Download sdk, ndk and qt"
+	@echo "make init_sdk			- Download sdk, ndk"
+	@echo "make init_qt			- Install qt"
 	@echo "make init_depend 		- Download sdk, ndk and dependencies, compile and install all dependencies in DISTILLERY_INSTALL"
 	@echo "make install-all 		- Configure, compile and install all software in DISTILLERY_INSTALL_DIR"
 	@echo "make curl-clean			- Clean curl files and libs"

@@ -32,8 +32,8 @@ if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libavformat ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libavutil ] \
 		|| [ ! -d ${INSTALLATION_DIR}/include/libswscale ]; then
-	if [ ! -d ffmpeg ]; then
-        cd src
+	cd src
+    if [ ! -d ffmpeg ]; then
         if [ ! -f ffmpeg-4.2-android-clang.tar.xz ]; then
 		    wget https://iweb.dl.sourceforge.net/project/avbuild/android/ffmpeg-4.2-android-clang.tar.xz
 	    fi
@@ -45,6 +45,6 @@ if [ ! -d ${BASE_PATH}/usr_aarch64/include/libavcodec ] \
 		touch ${VERSIONS_FILE}
 		${SED} -i "/${ABI}_ffmpeg/d" ${VERSIONS_FILE}
 		echo ${ABI}_ffmpeg=4.2 >> ${VERSIONS_FILE}
-        cd ..
     fi
+    cd ..
 fi
