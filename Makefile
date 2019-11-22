@@ -104,12 +104,31 @@ else
     DISTILLERY_LOCAL_MODULES_DIR="[Undefined]"
 endif
 
+init:
+	./scripts/init.sh ${DISTILLERY_INSTALL_DIR};
+
 install-all: install-directories ${modules}
 
 install-env: init_sdk init_qt
 
-init_depend:
-	./scripts/init.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
+download-dep:
+	./scripts/downlaod_dep.sh;
+
+compile-openssl:
+	./scripts/compile_openssl.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
+
+install-asio:
+	./scripts/install_asio.sh ${DISTILLERY_INSTALL_DIR};
+
+compile-dep: init compile-openssl install-asio libconfig libevent libxml2 curl viper/libdash
+
+download-hicn:
+	./scripts/downlaod_hicn.sh;
+
+compile-hicn: init cframework/libparc hicn
+
+#init_depend:
+#	./scripts/init.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
 init_sdk:
 	./scripts/init_sdk.sh
 init_qt:
