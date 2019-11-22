@@ -118,12 +118,20 @@ compile-openssl:
 	./scripts/compile_openssl.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
 
 install-asio:
-	./scripts/install_asio.sh ${DISTILLERY_INSTALL_DIR};
+	./scripts/install_asio.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
 
-compile-dep: init compile-openssl install-asio libconfig libevent libxml2 curl viper/libdash
+compile-dep: init compile-openssl install-asio libconfig libevent
 
 download-hicn:
 	./scripts/downlaod_hicn.sh;
+
+download-qtdep:
+	./scripts/downlaod_qtdep.sh;
+
+compile-qtdep: init libxml2 curl viper/libdash install-ffmpeg
+
+install-ffmpeg:
+	./scripts/install_ffmpeg.sh ${ABI} ${DISTILLERY_INSTALL_DIR};
 
 compile-hicn: init cframework/libparc hicn
 

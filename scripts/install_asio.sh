@@ -16,7 +16,8 @@
 #!/bin/bash
 
 set -ex
-INSTALLATION_DIR=$1
+ABI=$1
+INSTALLATION_DIR=$2
 OS=`echo $OS | tr '[:upper:]' '[:lower:]'`
 export BASE_DIR=`pwd`
 mkdir -p ${INSTALLATION_DIR}
@@ -34,5 +35,8 @@ if [ ! -d ${INSTALLATION_DIR}/include/asio ]; then
     fi
     cp -r asio/asio/include/asio.hpp ${INSTALLATION_DIR}/include/
     cp -r asio/asio/include/asio ${INSTALLATION_DIR}/include/
+    ASIO_VERSION=$(git log -1 --format="%H")
+    ${SED} -i "/${ABI}_asio/d" ${VERSIONS_FILE}
+	echo ${ABI}_asio=$ASIO_VERSION >> ${VERSIONS_FILE}
     cd ..
 fi

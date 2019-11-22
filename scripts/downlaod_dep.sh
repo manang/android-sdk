@@ -23,31 +23,6 @@ export BASE_DIR=`pwd`
 mkdir -p src
 cd src
 
-if [ ! -d viper ]; then
-	echo "cframework not found"
-	git clone -b viper/master https://gerrit.fd.io/r/cicn viper
-fi
-
-if [ ! -d curl ]; then
-	echo "curl  not found"
-	git clone https://github.com/curl/curl.git
-	cd curl
-	git checkout tags/curl-7_66_0
-	cd ..
-fi
-
-if [ ! -d libxml2 ]; then
-	echo "libxml2 not found"
-	git clone https://github.com/GNOME/libxml2.git
-	cd libxml2
-	git checkout tags/v2.9.9
-	cd ..
-	cp $BASE_DIR/external/libxml2/CMakeLists.txt libxml2
-	cp $BASE_DIR/external/libxml2/xmlversion.h libxml2/include/libxml
-	cp $BASE_DIR/external/libxml2/config.h libxml2
-	${SED} -i '1s/^/#include <errno.h>/' libxml2/triodef.h
-fi
-
 if [ ! -d libevent ]; then
     echo "libevent not found"
 	git clone https://github.com/libevent/libevent.git
@@ -72,4 +47,3 @@ if [ ! -d libconfig ]; then
 	cd ..
 	${SED} -i -- '2s/$/include(CheckSymbolExists)/' libconfig/CMakeLists.txt 
 fi
-
