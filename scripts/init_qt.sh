@@ -18,6 +18,23 @@
 set -ex
 QT_VERSION=5.13.1
 QT_VERSION_INSTALL=5131
+
+
+mkdir -p qt
+cd qt
+export QT_HOME=`pwd`/Qt
+if [ ! -d ${QT_HOME} ]; then
+	if [ ! -d qtci ]; then
+		git clone https://github.com/benlau/qtci.git
+	fi
+	export PATH=$PATH:`pwd`/qtci/bin:`pwd`/qtci/recipes
+	export QT_CI_PACKAGES=qt.qt5.${QT_VERSION_INSTALL}.android_arm64_v8a,qt.qt5.${QT_VERSION_INSTALL}.qtcharts.android_arm64_v8a,qt.qt5.${QT_VERSION_INSTALL}.qtcharts,qt.qt5.${QT_VERSION_INSTALL}.android_x86,qtcharts.android_x86
+	install-qt ${QT_VERSION}
+	rm -rf ${QT_HOME}/MaintenanceTool.*
+	rm -rf ${QT_HOME}/Qt\ Creator.app
+fi
+
+exit 0
 if [ "$ABI" = "arm64" ]; then
 	BASE_PATH=`pwd`
 	mkdir -p qt
